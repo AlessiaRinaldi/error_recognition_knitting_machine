@@ -53,12 +53,12 @@ def ncc(A, B, mask=None):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pos", required=True, help="Cartella immagini con filo (pos)")
-    ap.add_argument("--neg", required=True, help="Cartella immagini senza filo (neg)")
-    ap.add_argument("--roi", required=True, help="roi_mask.png (bianco=zona da analizzare)")
-    ap.add_argument("--dir", required=True, help="Cartella test da valutare")
-    ap.add_argument("--thr", type=float, default=0.10, help="Soglia su LLR (NCC_pos - NCC_neg)")
-    ap.add_argument("--outdir", default=None, help="Dove salvare le annotazioni (default: test/)")
+    ap.add_argument("--pos", required=True) #valutare se mettere help="..."
+    ap.add_argument("--neg", required=True)
+    ap.add_argument("--roi", required=True)
+    ap.add_argument("--dir", required=True)
+    ap.add_argument("--thr", type=float, default=0.10)
+    ap.add_argument("--outdir", default=None)
     args = ap.parse_args()
 
     # maschera in scala di grigi: 
