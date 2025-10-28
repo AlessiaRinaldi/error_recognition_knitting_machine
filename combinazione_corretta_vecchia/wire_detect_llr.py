@@ -1,9 +1,8 @@
 # scopo: LLR = NCC(img, proto_pos) - NCC(img, proto_neg) dentro ROI
 # Se LLR >= thr allora "filo presente" (da valutare se mettere 0 come threshold)
 
-# PER COMPILARE:
-#                python wire_detect_llr.py --pos .\pos --neg .\neg --roi .\mask_out_mean\mask_soft.png --dir .\test --thr 0.0
-# la mask_soft.png funziona meglio perchè preserva la texture
+# PER COMPILARE: cd progetto
+#                python wire_detect_llr.py --pos .\data\pos --neg .\data\neg --roi .\roi_mask.png --dir .\test --thr 0.0
 
 import os, glob, argparse
 import numpy as np
@@ -108,8 +107,8 @@ def main():
         # visualizzazione  (non serve ai fini del progetto -> da togliere una volta risolto riconoscimento di errori) 
         vis = bgr.copy()
         color = (0,255,0) if present else (0,0,255) # comodo in fase di debug
-        #cnts,_ = cv2.findContours((roi_rs>0).astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        #cv2.drawContours(vis, cnts, -1, color, 2)
+        cnts,_ = cv2.findContours((roi_rs>0).astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        cv2.drawContours(vis, cnts, -1, color, 2)
         cv2.putText(vis, f"LLR={llr:.3f}",
                     (5, max(18,H-8)), cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 2, cv2.LINE_AA)
 
